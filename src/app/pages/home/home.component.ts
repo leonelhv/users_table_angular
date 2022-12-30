@@ -25,5 +25,10 @@ export class HomeComponent {
     },
   ];
 
-  agregarUsuario(nombre: string, apellido: string, edad: number) {}
+  agregarUsuario(nombre: string, apellido: string, edad: string): void {
+    if (!nombre || !apellido || !edad) {
+      return;
+    }
+    this.users.push({ nombre, apellido, edad: Number(edad) });
+  }
 }

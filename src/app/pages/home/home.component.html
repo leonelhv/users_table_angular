@@ -1,63 +1,76 @@
-<div class="row g-3 align-items-center my-3">
-  <div class="col-auto">
-    <label for="nombre" class="col-form-label">Nombre</label>
+<form
+  novalidate
+  (ngSubmit)="agregarUsuario(nombre.value, apellido.value, edad.value)"
+>
+  <div class="row g-3 align-items-center my-3">
+    <div class="col-auto">
+      <label for="nombre" class="col-form-label">Nombre</label>
+    </div>
+    <div class="col-auto">
+      <input
+        type="text"
+        id="nombre"
+        class="form-control"
+        aria-describedby="nombreHelpInline"
+        #nombre
+      />
+    </div>
+    <!--   <div class="col-auto">
+      <span id="nombreHelpInline" class="form-text">
+        Must be 8-20 characters long.
+      </span>
+    </div>
+   -->
   </div>
-  <div class="col-auto">
-    <input
-      type="text"
-      id="nombre"
-      class="form-control"
-      aria-describedby="nombreHelpInline"
-    />
+  <div class="row g-3 align-items-center my-3">
+    <div class="col-auto">
+      <label for="apellido" class="col-form-label">apellido</label>
+    </div>
+    <div class="col-auto">
+      <input
+        type="text"
+        id="apellido"
+        class="form-control"
+        aria-describedby="apellidoHelpInline"
+        #apellido
+      />
+    </div>
+    <!--   <div class="col-auto">
+      <span id="apellidoHelpInline" class="form-text">
+        Must be 8-20 characters long.
+      </span>
+    </div>
+   -->
   </div>
-  <!--   <div class="col-auto">
-    <span id="nombreHelpInline" class="form-text">
-      Must be 8-20 characters long.
-    </span>
+  <div class="row g-3 align-items-center my-3">
+    <div class="col-auto">
+      <label for="edad" class="col-form-label">edad</label>
+    </div>
+    <div class="col-auto">
+      <input
+        type="number"
+        id="edad"
+        class="form-control"
+        aria-describedby="edadHelpInline"
+        #edad
+      />
+    </div>
+    <!--   <div class="col-auto">
+      <span id="edadHelpInline" class="form-text">
+        Must be 8-20 characters long.
+      </span>
+    </div>
+   -->
   </div>
- -->
-</div>
-<div class="row g-3 align-items-center my-3">
-  <div class="col-auto">
-    <label for="apellido" class="col-form-label">apellido</label>
-  </div>
-  <div class="col-auto">
-    <input
-      type="text"
-      id="apellido"
-      class="form-control"
-      aria-describedby="apellidoHelpInline"
-    />
-  </div>
-  <!--   <div class="col-auto">
-    <span id="apellidoHelpInline" class="form-text">
-      Must be 8-20 characters long.
-    </span>
-  </div>
- -->
-</div>
-<div class="row g-3 align-items-center my-3">
-  <div class="col-auto">
-    <label for="edad" class="col-form-label">edad</label>
-  </div>
-  <div class="col-auto">
-    <input
-      type="number"
-      id="edad"
-      class="form-control"
-      aria-describedby="edadHelpInline"
-    />
-  </div>
-  <!--   <div class="col-auto">
-    <span id="edadHelpInline" class="form-text">
-      Must be 8-20 characters long.
-    </span>
-  </div>
- -->
-</div>
+</form>
 
 <div class="my-4">
-  <button class="btn btn-primary">Agregar Dato</button>
+  <button
+    (click)="agregarUsuario(nombre.value, apellido.value, edad.value)"
+    class="btn btn-primary"
+  >
+    Agregar Dato
+  </button>
 </div>
 
 <div>
@@ -75,6 +88,8 @@
         <td>{{ user.nombre }}</td>
         <td>{{ user.apellido }}</td>
         <td>{{ user.edad }}</td>
+        <td *ngIf="user.edad >= 18">{{ user.nombre }} es mayor de edad</td>
+        <td *ngIf="user.edad < 18">{{ user.nombre }} es menor de edad</td>
       </tr>
     </tbody>
   </table>
