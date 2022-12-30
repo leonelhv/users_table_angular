@@ -1,7 +1,7 @@
 <form
   novalidate
-  (ngSubmit)="agregarUsuario(nombre.value, apellido.value, edad.value)"
   #formUser="ngForm"
+  (ngSubmit)="agregarUsuario(nombre.value, apellido.value, edad.value)"
 >
   <div class="row g-3 align-items-center my-3">
     <div class="col-auto">
@@ -13,16 +13,17 @@
         id="nombre"
         class="form-control"
         aria-describedby="nombreHelpInline"
-        #nombre
         required
+        #nombre="ngModel"
+        name="nombre"
+        ngModel
       />
     </div>
-    <!--   <div class="col-auto">
-      <span id="nombreHelpInline" class="form-text">
-        Must be 8-20 characters long.
+    <div class="col-auto" *ngIf="nombre.invalid && nombre.touched">
+      <span id="nombreHelpInline" class="form-text text-danger">
+        Nombre es requerido
       </span>
     </div>
-   -->
   </div>
   <div class="row g-3 align-items-center my-3">
     <div class="col-auto">
@@ -34,16 +35,17 @@
         id="apellido"
         class="form-control"
         aria-describedby="apellidoHelpInline"
-        #apellido
         required
+        #apellido="ngModel"
+        name="apellido"
+        ngModel
       />
     </div>
-    <!--   <div class="col-auto">
-      <span id="apellidoHelpInline" class="form-text">
-        Must be 8-20 characters long.
+    <div class="col-auto" *ngIf="apellido.invalid && apellido.touched">
+      <span id="apellidoHelpInline" class="form-text text-danger">
+        Apellido es requerido
       </span>
     </div>
-   -->
   </div>
   <div class="row g-3 align-items-center my-3">
     <div class="col-auto">
@@ -55,22 +57,26 @@
         id="edad"
         class="form-control"
         aria-describedby="edadHelpInline"
-        #edad
         required
+        #edad="ngModel"
+        name="edad"
+        ngModel
+        min="1"
       />
     </div>
-    <!--   <div class="col-auto">
-      <span id="edadHelpInline" class="form-text">
-        Must be 8-20 characters long.
+    <div class="col-auto" *ngIf="edad.errors?.['min'] && edad.touched">
+      <span id="edadHelpInline" class="form-text text-danger">
+        Edad minima es 1
       </span>
     </div>
-   -->
   </div>
 </form>
 
 <div class="my-4">
   <button
-    (click)="agregarUsuario(nombre.value, apellido.value, edad.value)"
+    (click)="
+      agregarUsuario(nombre.value, apellido.value, edad.value); formUser.reset()
+    "
     class="btn btn-primary"
     [disabled]="formUser.invalid"
   >
