@@ -1,6 +1,7 @@
 <form
   novalidate
   (ngSubmit)="agregarUsuario(nombre.value, apellido.value, edad.value)"
+  #formUser="ngForm"
 >
   <div class="row g-3 align-items-center my-3">
     <div class="col-auto">
@@ -13,6 +14,7 @@
         class="form-control"
         aria-describedby="nombreHelpInline"
         #nombre
+        required
       />
     </div>
     <!--   <div class="col-auto">
@@ -33,6 +35,7 @@
         class="form-control"
         aria-describedby="apellidoHelpInline"
         #apellido
+        required
       />
     </div>
     <!--   <div class="col-auto">
@@ -53,6 +56,7 @@
         class="form-control"
         aria-describedby="edadHelpInline"
         #edad
+        required
       />
     </div>
     <!--   <div class="col-auto">
@@ -68,6 +72,7 @@
   <button
     (click)="agregarUsuario(nombre.value, apellido.value, edad.value)"
     class="btn btn-primary"
+    [disabled]="formUser.invalid"
   >
     Agregar Dato
   </button>
